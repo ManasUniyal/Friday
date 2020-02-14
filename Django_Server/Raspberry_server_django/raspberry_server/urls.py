@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
 from . import views
 
 urlpatterns = [
@@ -23,4 +24,5 @@ urlpatterns = [
     path('list_songs/', views.list_songs, name='list_songs'),
     path('list_videos/', views.list_videos, name='list_videos'),
     path('list_images/', views.list_images, name='list_images'),
+    path('APIs/', include('APIs.urls'), name='APIs'),
 ]
