@@ -14,6 +14,9 @@ public class MenuHandller : MonoBehaviour
     private int activePage;
     private int numberOfPages = 3;
 
+    //  Options
+    public GameObject Dictionary;
+
     void Start()
     {
         Manager = GameObject.Find("GameManager");
@@ -48,8 +51,19 @@ public class MenuHandller : MonoBehaviour
             
             }
             else if (action == "2")
-            {
-            
+            {   
+                if(activePage == 0){
+
+                    isActive = false;
+                    Dictionary.SetActive(true);
+                    Dictionary.GetComponent<DictionaryHandller>().Activate();
+                    gameObject.SetActive(false);        
+                
+                }else if(activePage == 1){
+
+                }else if(activePage == 2){
+
+                }
             }
             else if (action == "3")
             {

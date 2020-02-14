@@ -32,7 +32,7 @@ public class Base : MonoBehaviour
             }
             else if (action == "2")
             {
-            
+               
             }
             else if (action == "3")
             {
@@ -50,7 +50,7 @@ public class Base : MonoBehaviour
             {
                 isActive = false;
                 Menu.SetActive(true);
-                Menu.GetComponent<MenuHandller>().isActive = true;
+                Menu.GetComponent<MenuHandller>().Activate();
             }
             else if (action == "PREVIOUS")
             {
