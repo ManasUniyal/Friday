@@ -1,6 +1,7 @@
 import requests
+import json
 
-url = "https://wordsapiv1.p.rapidapi.com/words/example"
+url = "https://wordsapiv1.p.rapidapi.com/words/beautiful"
 
 headers = {
     'x-rapidapi-host': "wordsapiv1.p.rapidapi.com",
@@ -8,5 +9,10 @@ headers = {
     }
 
 response = requests.request("GET", url, headers=headers)
+json_data = json.loads(response.text)
 
-print(response.text)
+print("Json data")
+print("word = "+json_data['word'])
+print("defintion = "+json_data['results'][0]['definition'])
+print("part of speech = "+json_data['results'][0]['partOfSpeech'])
+print(json_data)
