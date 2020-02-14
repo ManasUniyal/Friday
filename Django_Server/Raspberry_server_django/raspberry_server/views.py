@@ -1,0 +1,38 @@
+from django.shortcuts import render
+import subprocess
+
+def call(request):
+	if request.method == 'POST':
+		call_GSM(int(request.POST['phoneNumber']))
+
+def list_songs(request):
+	if request.method == 'GET':
+		subprocess.call('/home/manas/Desktop/raspberry_server_django/shell_scripts/get_songs_list.sh')
+		f = open("/home/manas/Desktop/raspberry_server_django/shell_scripts/songs_list.txt","r")
+		song_string = ""
+		for song in f:
+			song_string += song.strip() + "#"
+		return render(request, 'base.html', {'concatenated_string' : song_string})
+
+def list_videos(request):
+	if request.method == 'GET':
+		subprocess.call('/home/manas/Desktop/raspberry_server_django/shell_scripts/get_videos_list.sh')
+		f = open("/home/manas/Desktop/raspberry_server_django/shell_scripts/videos_list.txt","r")
+		video_string = ""
+		for video in f:
+			video_string += video.strip() + "#"
+		return render(request, 'base.html', {'concatenated_string' : video_string})
+
+def list_images(request):
+	if request.method == 'GET':
+		subprocess.call('/home/manas/Desktop/raspberry_server_django/shell_scripts/get_images_list.sh')
+		f = open("/home/manas/Desktop/raspberry_server_django/shell_scripts/images_list.txt","r")
+		image_string = ""
+		for image in f:
+			image_string += image.strip() + "#"
+		return render(request, 'base.html', {'concatenated_string' : image_string})
+
+
+def call_GSM(phoneNumber):
+	pass		
+
