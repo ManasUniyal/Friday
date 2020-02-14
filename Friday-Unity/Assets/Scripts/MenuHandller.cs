@@ -10,14 +10,28 @@ public class MenuHandller : MonoBehaviour
     private string action;
     private GameObject Manager;
     public TextMeshProUGUI []txts;
-    string [,]MenuItems = { { "Phone Call" , "Dictionary" , "News" , "Gallery" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Gallery" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
+    private int activePage;
+    private int numberOfPages = 3;
 
     void Start()
     {
-        isActive = true;
         Manager = GameObject.Find("GameManager");
         Debug.Log("MenuStart");
+        Activate();
     }
+
+    public void Activate(){
+        isActive = true;
+        activePage = 0;
+        UpdatePage();
+    }
+
+    private void UpdatePage(){
+        for(int i=0;i<4;i++){
+            txts[i].text = menuItems[activePage,i];
+        }
+    } 
 
     void FixedUpdate()
     {
@@ -45,10 +59,6 @@ public class MenuHandller : MonoBehaviour
             {
             
             }
-            else if (action == "NEXT")
-            {
-            
-            }
             else if (action == "HOME")
             {
 
@@ -57,9 +67,24 @@ public class MenuHandller : MonoBehaviour
                 gameObject.SetActive(false);
             
             }
+            else if (action == "NEXT")
+            {
+                
+                activePage++;
+                if (activePage >= numberOfPages){
+                    activePage = numberOfPages-1;
+                }
+                UpdatePage();
+            }
             else if (action == "PREVIOUS")
             {
             
+                activePage--;
+                if (activePage < 0){
+                    activePage = 0;
+                }
+                UpdatePage();
+
             }
             else if (action == "SPECIAL")
             {
