@@ -9,8 +9,7 @@ public class Base : MonoBehaviour
     private GameObject Manager;
 	private string action;
     public GameObject Menu;
-    public bool accept = true;
-
+    
     void Start()
     {
         Manager = GameObject.Find("GameManager");
