@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Base : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Base : MonoBehaviour
     private GameObject Manager;
 	private string action;
     public GameObject Menu;
-    
+
     void Start()
     {
         Manager = GameObject.Find("GameManager");

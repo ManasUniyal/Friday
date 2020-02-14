@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MenuHandller : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MenuHandller : MonoBehaviour
     public bool isActive;
     private string action;
     private GameObject Manager;
+    public TextMeshProUGUI []txts;
+    string [,]MenuItems = { { "Phone Call" , "Dictionary" , "News" , "Gallery" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
 
     void Start()
     {
