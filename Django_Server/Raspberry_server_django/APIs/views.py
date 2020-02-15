@@ -8,6 +8,9 @@ import glob
 import youtube_dl
 import webbrowser
 import os
+import shutil
+import socket
+import sys
 
 # Create your views here.
 
@@ -74,12 +77,13 @@ def youtube(request):
 		latest_file = max(list_of_files, key=os.path.getctime)
 		print(latest_file)
 		os.rename(latest_file[latest_file.rfind("/")+1:], textToSearch+".mp4") 
-
+		shutil.move("./"+textToSearch+".mp4", "./videos/"+textToSearch+".mp4")
+		
 		UDP_IP = "10.0.0.11"
 		UDP_PORT = 5065
 
 		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		txt = "1#" + textToSearchv + ".mp4"
+		txt = "1#" + textToSearch + ".mp4"
 		sock.sendto( txt.encode(), (UDP_IP, UDP_PORT))
 		
 		return render(request, 'base.html')
