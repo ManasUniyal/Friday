@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: c56a507498eb4c44fb02d8b72043db26
+  - enabled: 1
+    path: Assets/Scenes/back cam trial.unity
+    guid: 983e1527555510241bdf077089e19828
   m_configObjects: {}

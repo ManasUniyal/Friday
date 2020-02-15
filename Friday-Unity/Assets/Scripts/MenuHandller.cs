@@ -10,7 +10,7 @@ public class MenuHandller : MonoBehaviour
     private string action;
     private GameObject Manager;
     public TextMeshProUGUI []txts;
-    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "H" }, { "I" , "J", "K" , "L" } };
     private int activePage;
     private int numberOfPages = 3;
 
@@ -18,6 +18,7 @@ public class MenuHandller : MonoBehaviour
     public GameObject Dictionary;
     public GameObject News;
     public GameObject Youtube;
+    public GameObject Video;
 
     void Start()
     {
@@ -50,7 +51,23 @@ public class MenuHandller : MonoBehaviour
             }
             else if (action == "1")
             {
-            
+                if(activePage == 0){
+
+                    // isActive = false;
+                    // Dictionary.SetActive(true);
+                    // Dictionary.GetComponent<DictionaryHandller>().Activate();
+                    // gameObject.SetActive(false);        
+                
+                }else if(activePage == 1){
+
+                    isActive = false;
+                    Video.SetActive(true);
+                    Video.GetComponent<VideoMenu>().Activate();
+                    gameObject.SetActive(false);        
+
+                }else if(activePage == 2){
+
+                }
             }
             else if (action == "2")
             {   
@@ -62,6 +79,11 @@ public class MenuHandller : MonoBehaviour
                     gameObject.SetActive(false);        
                 
                 }else if(activePage == 1){
+
+                    isActive = false;
+                    Video.SetActive(true);
+                    Video.GetComponent<VideoMenu>().Activate();
+                    gameObject.SetActive(false);        
 
                 }else if(activePage == 2){
 

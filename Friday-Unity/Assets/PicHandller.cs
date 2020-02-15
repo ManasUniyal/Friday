@@ -1,30 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
 
-public class YoutubeHandller : MonoBehaviour
+public class PicHandller : MonoBehaviour
 {
-
-    private string action;
+    
     public bool isActive;
-    public TextMeshProUGUI meaning;
-    public TextMeshProUGUI searchWord;
+    private string action;
     private GameObject Manager;
+    public RawImage YourRawImage;
+    public TextMeshProUGUI searchWord;
+
+    //  Options
     
     void Start()
     {
         Manager = GameObject.Find("GameManager");
-        Debug.Log("DictionaryStart");
+        Debug.Log("PicStart");
+        Activate();
     }
 
-    public void Activate(){
+    public void Activate(){  
         isActive = true;
-        searchWord.text = "Search Video";
+        StartCoroutine(DownloadImage("http://10.0.0.6:5004/"+searchWord.text));    
     }
 
+    
     void FixedUpdate()
     {
         if (isActive)
@@ -40,16 +45,16 @@ public class YoutubeHandller : MonoBehaviour
             
             }
             else if (action == "2")
-            {
-            
+            {   
+                
             }
             else if (action == "3")
             {
-            
+                
             }
             else if (action == "4")
             {
-            
+                
             }
             else if (action == "HOME")
             {
@@ -62,39 +67,35 @@ public class YoutubeHandller : MonoBehaviour
             else if (action == "NEXT")
             {
                 
-
+                
             }
             else if (action == "PREVIOUS")
             {
             
-            }
-            else if (action == "SPECIAL1")
-            {
+                
 
-                StartCoroutine(scr(searchWord.text));
-                searchWord.text = "";
+            }
+            else if (action == "SPECIAL")
+            {
             
             }
         }
     }
-
-
-   IEnumerator scr(string searchedhWord){
-		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/youtube/?word="+searchedhWord))
-        {
-            
-            Debug.Log("Requested dictionary api for " + searchedhWord);
     
-            searchWord.text = "";
-            
-            meaning.text = "Your Video has started downloading. You can view it after completion in video player.";
-				
-			yield return new WaitForSeconds(0.2f);;
-         
+
+    IEnumerator DownloadImage(string MediaUrl)
+    {   
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return request.SendWebRequest();
+        if(request.isNetworkError || request.isHttpError) 
+            Debug.Log(request.error);
+        else{
+            Color currColor = YourRawImage.color;
+            currColor.a = 0.6f;
+            YourRawImage.color = currColor;
+            YourRawImage.texture = ((DownloadHandlerTexture) request.downloadHandler).texture;
         }
-
-	}
-    
+            
+    }
 
 }

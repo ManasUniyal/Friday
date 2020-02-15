@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking; 
+using UnityEngine.Video;
 
 public class VideoHandller : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class VideoHandller : MonoBehaviour
     public bool isActive;
     private string action;
     private GameObject Manager;
-    
+    public VideoPlayer videoPlayer;
+    public TextMeshProUGUI searchWord;
+
     //  Options
     
     void Start()
@@ -20,8 +23,11 @@ public class VideoHandller : MonoBehaviour
         Activate();
     }
 
-    public void Activate(){
+    public void Activate(){  
         isActive = true;
+        videoPlayer.url = "http://10.0.0.6:5002/"+searchWord.text;
+        videoPlayer.targetCameraAlpha = 0.5F;
+        videoPlayer.Play();
     }
 
     
@@ -56,6 +62,7 @@ public class VideoHandller : MonoBehaviour
 
                 isActive = false;
                 Manager.GetComponent<Base>().isActive = true;
+                videoPlayer.Pause();
                 gameObject.SetActive(false);
             
             }
@@ -76,4 +83,6 @@ public class VideoHandller : MonoBehaviour
             }
         }
     }
+    
+
 }

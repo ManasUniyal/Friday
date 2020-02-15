@@ -141,7 +141,7 @@ public class NewsHandller : MonoBehaviour
 			    
 		    }
         }
-
+        searchWord.text = "";
         UpdatePage();
 
 	}

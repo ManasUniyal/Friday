@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking; 
+using UnityEngine.Video;
 using TMPro;
-using UnityEngine.Networking;
 
-
-public class VideoMenu : MonoBehaviour
+public class PicMenu : MonoBehaviour
 {
     public bool isActive;
     private string action;
@@ -20,7 +20,7 @@ public class VideoMenu : MonoBehaviour
     void Start()
     {
         Manager = GameObject.Find("GameManager");
-        Debug.Log("VideoStart");
+        Debug.Log("PicStart");
         Activate();
     }
 
@@ -104,13 +104,13 @@ public class VideoMenu : MonoBehaviour
     private void PlayVideo(){
         isActive = false; 
         Video.SetActive(true);
-        Video.GetComponent<VideoHandller>().Activate();
+        // Video.GetComponent<PicHandller>().Activate();
         gameObject.SetActive(false);
     }
     
     IEnumerator Daily(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/listVideos"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/listImages"))
         {
             
             searchWord.text = "Loading ...";
