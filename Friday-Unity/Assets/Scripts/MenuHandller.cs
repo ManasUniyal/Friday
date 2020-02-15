@@ -10,7 +10,7 @@ public class MenuHandller : MonoBehaviour
     private string action;
     private GameObject Manager;
     public TextMeshProUGUI []txts;
-    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "H" }, { "I" , "J", "K" , "L" } };
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "Weather" }, { "I" , "J", "K" , "L" } };
     private int activePage;
     private int numberOfPages = 3;
 
@@ -19,6 +19,9 @@ public class MenuHandller : MonoBehaviour
     public GameObject News;
     public GameObject Youtube;
     public GameObject Video;
+    public GameObject Gallery;
+    public GameObject Music;
+    public GameObject Weather;
 
     void Start()
     {
@@ -81,8 +84,8 @@ public class MenuHandller : MonoBehaviour
                 }else if(activePage == 1){
 
                     isActive = false;
-                    Video.SetActive(true);
-                    Video.GetComponent<VideoMenu>().Activate();
+                    Gallery.SetActive(true);
+                    Gallery.GetComponent<PicMenu>().Activate();
                     gameObject.SetActive(false);        
 
                 }else if(activePage == 2){
@@ -100,6 +103,11 @@ public class MenuHandller : MonoBehaviour
                 
                 }else if(activePage == 1){
 
+                    isActive = false;
+                    Music.SetActive(true);
+                    Music.GetComponent<MusicMenu>().Activate();
+                    gameObject.SetActive(false);   
+
                 }else if(activePage == 2){
 
                 }            
@@ -114,6 +122,11 @@ public class MenuHandller : MonoBehaviour
                     gameObject.SetActive(false);        
                 
                 }else if(activePage == 1){
+                    
+                    isActive = false;
+                    Weather.SetActive(true);
+                    Weather.GetComponent<WeatherHandller>().Activate();
+                    gameObject.SetActive(false);   
 
                 }else if(activePage == 2){
 
