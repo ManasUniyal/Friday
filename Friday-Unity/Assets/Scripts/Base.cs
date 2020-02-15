@@ -20,6 +20,7 @@ public class Base : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log("Hiiiiiiiiiiiiii");
         if (isActive)
         {
             action = Manager.GetComponent<UDPHandller>().action;

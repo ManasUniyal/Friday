@@ -61,6 +61,7 @@ public class PicHandller : MonoBehaviour
             {
 
                 isActive = false;
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             
@@ -87,6 +88,7 @@ public class PicHandller : MonoBehaviour
     IEnumerator DownloadImage(string MediaUrl)
     {   
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+        Debug.Log(MediaUrl);
         yield return request.SendWebRequest();
         if(request.isNetworkError || request.isHttpError) 
             Debug.Log(request.error);

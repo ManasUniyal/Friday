@@ -102,6 +102,7 @@ public class VideoMenu : MonoBehaviour
     }
 
     private void PlayVideo(){
+    	Manager.GetComponent<UDPHandller>().vid = true;
         isActive = false; 
         Video.SetActive(true);
         Video.GetComponent<VideoHandller>().Activate();

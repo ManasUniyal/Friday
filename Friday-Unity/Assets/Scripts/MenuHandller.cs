@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Networking;
 
 public class MenuHandller : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class MenuHandller : MonoBehaviour
     private string action;
     private GameObject Manager;
     public TextMeshProUGUI []txts;
-    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "Weather" }, { "I" , "J", "K" , "L" } };
+    public TextMeshProUGUI searchWord;
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "Weather" }, { "Camera" , "Alarm", "Q/A" , "" } };
     private int activePage;
     private int numberOfPages = 3;
 
@@ -22,6 +24,10 @@ public class MenuHandller : MonoBehaviour
     public GameObject Gallery;
     public GameObject Music;
     public GameObject Weather;
+    public GameObject Alarm;
+    public GameObject QA;
+    public GameObject Call;
+    
 
     void Start()
     {
@@ -56,10 +62,10 @@ public class MenuHandller : MonoBehaviour
             {
                 if(activePage == 0){
 
-                    // isActive = false;
-                    // Dictionary.SetActive(true);
-                    // Dictionary.GetComponent<DictionaryHandller>().Activate();
-                    // gameObject.SetActive(false);        
+                    isActive = false;
+                    Call.SetActive(true);
+                    Call.GetComponent<CallHandller>().Activate();
+                    gameObject.SetActive(false);        
                 
                 }else if(activePage == 1){
 
@@ -69,6 +75,8 @@ public class MenuHandller : MonoBehaviour
                     gameObject.SetActive(false);        
 
                 }else if(activePage == 2){
+
+                    StartCoroutine(cam());
 
                 }
             }
@@ -89,7 +97,12 @@ public class MenuHandller : MonoBehaviour
                     gameObject.SetActive(false);        
 
                 }else if(activePage == 2){
-
+                    
+                    isActive = false;
+                    Alarm.SetActive(true);
+                    Alarm.GetComponent<AlarmHandller>().Activate();
+                    gameObject.SetActive(false);
+                
                 }
             }
             else if (action == "3")
@@ -109,6 +122,11 @@ public class MenuHandller : MonoBehaviour
                     gameObject.SetActive(false);   
 
                 }else if(activePage == 2){
+
+                    isActive = false;
+                    QA.SetActive(true);
+                    QA.GetComponent<QAHandller>().Activate();
+                    gameObject.SetActive(false);   
 
                 }            
             }
@@ -165,5 +183,30 @@ public class MenuHandller : MonoBehaviour
             }
         }
     }
+
+       IEnumerator cam(){
+		
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/captureImage/"))
+        {
+            
+            Debug.Log("Requested dictionary api for " );
+    
+            searchWord.text = "Loading ...";
+            
+			yield return webRequest.SendWebRequest();
+         
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log( ": Error: " + webRequest.error);
+                searchWord.text = webRequest.error;
+            }
+            else
+            {
+			    searchWord.text = "Shot Captured";
+		    }
+        }
+
+	}
+
 
 }

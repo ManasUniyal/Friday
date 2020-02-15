@@ -1,46 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.Networking; 
-using UnityEngine.Video;
 
-public class VideoHandller : MonoBehaviour
+public class VideoGesture : MonoBehaviour
 {
-    
-    public bool isActive;
+ 
     private string action;
     private GameObject Manager;
-    public VideoPlayer videoPlayer;
-    public TextMeshProUGUI searchWord;
-
-    //  Options
+    public GameObject videoPlayer;
     
     void Start()
     {
         Manager = GameObject.Find("GameManager");
-        Debug.Log("MenuStart");
-        Activate();
-    }
-
-    public void Activate(){  
-        isActive = true;
-        videoPlayer.url = "http://10.0.0.6:5002/"+searchWord.text;
-        videoPlayer.targetCameraAlpha = 0.5F;
-        StartCoroutine(scr());
-        Debug.Log("Hi");
-    }
-
-    IEnumerator scr(){
-        videoPlayer.Play();
-        yield return new WaitForSeconds(0.2f);
     }
 
     void Update()
     {
-        Debug.Log("hi");
-        if (isActive)
-        {
+        if(Manager.GetComponent<UDPHandller>().vid){
+
+        
             action = Manager.GetComponent<UDPHandller>().action;
 			Manager.GetComponent<UDPHandller>().action = null;
             if (action == "")
@@ -66,11 +44,10 @@ public class VideoHandller : MonoBehaviour
             else if (action == "HOME")
             {
 
-                isActive = false;
                 Manager.GetComponent<Base>().isActive = true;
-                videoPlayer.Pause();
-                gameObject.SetActive(false);
-            
+                Manager.GetComponent<UDPHandller>().vid = false;
+                videoPlayer.SetActive(false);
+
             }
             else if (action == "NEXT")
             {
@@ -90,5 +67,4 @@ public class VideoHandller : MonoBehaviour
         }
     }
     
-
 }

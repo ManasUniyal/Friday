@@ -57,17 +57,19 @@ public class DictionaryHandller : MonoBehaviour
 
                 isActive = false;
                 Manager.GetComponent<Base>().isActive = true;
+                searchWord.text = "";
                 gameObject.SetActive(false);
             
             }
             else if (action == "NEXT")
             {
                 
+                StartCoroutine(ocr());
 
             }
             else if (action == "PREVIOUS")
             {
-            
+                
             }
             else if (action == "SPECIAL1")
             {
@@ -107,6 +109,35 @@ public class DictionaryHandller : MonoBehaviour
 				meaning.text = res[1];
 				example.text = res[2];
 			
+		    }
+        }
+
+	}
+
+   IEnumerator ocr(){
+		
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR"))
+        {
+            
+            Debug.Log("Requested dictionary api for " );
+    
+            searchWord.text = "Loading ...";
+            
+			yield return webRequest.SendWebRequest();
+         
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log( ": Error: " + webRequest.error);
+                meaning.text = webRequest.error;
+            }
+            else
+            {
+
+				string []res = webRequest.downloadHandler.text.Split('#');
+				Debug.Log(res);
+				Debug.Log(res[0]);
+
+			    searchWord.text = res[0];
 		    }
         }
 

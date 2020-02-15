@@ -73,6 +73,7 @@ public class MusicMenu : MonoBehaviour
             {
 
                 isActive = false;
+                searchWord = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             

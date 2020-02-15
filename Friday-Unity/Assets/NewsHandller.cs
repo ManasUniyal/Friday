@@ -65,6 +65,7 @@ public class NewsHandller : MonoBehaviour
             {
 
                 isActive = false;
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             

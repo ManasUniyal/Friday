@@ -110,7 +110,7 @@ public class PicMenu : MonoBehaviour
     
     IEnumerator Daily(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/listImages"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/listImages/"))
         {
             
             searchWord.text = "Loading ...";

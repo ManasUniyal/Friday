@@ -55,6 +55,7 @@ public class YoutubeHandller : MonoBehaviour
             {
 
                 isActive = false;
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             
@@ -62,6 +63,7 @@ public class YoutubeHandller : MonoBehaviour
             else if (action == "NEXT")
             {
                 
+                StartCoroutine(ocr());
 
             }
             else if (action == "PREVIOUS")
@@ -90,8 +92,37 @@ public class YoutubeHandller : MonoBehaviour
             
             meaning.text = "Your Video has started downloading. You can view it after completion in video player.";
 				
-			yield return new WaitForSeconds(0.2f);;
+			yield return new WaitForSeconds(0.2f);
          
+        }
+
+	}
+
+    IEnumerator ocr(){
+		
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR"))
+        {
+            
+            Debug.Log("Requested dictionary api for " );
+    
+            searchWord.text = "Loading ...";
+            
+			yield return webRequest.SendWebRequest();
+         
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log( ": Error: " + webRequest.error);
+    		    searchWord.text = webRequest.error;
+	        }
+            else
+            {
+
+				string []res = webRequest.downloadHandler.text.Split('#');
+				Debug.Log(res);
+				Debug.Log(res[0]);
+
+			    searchWord.text = res[0];
+		    }
         }
 
 	}

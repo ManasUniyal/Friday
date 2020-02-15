@@ -4,14 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
 
-public class WeatherHandller : MonoBehaviour
+public class AlarmHandller : MonoBehaviour
 {
-
+    
     private string action;
     public bool isActive;
-    public TextMeshProUGUI word;
     public TextMeshProUGUI meaning;
-    public TextMeshProUGUI example;
     public TextMeshProUGUI searchWord;
     private GameObject Manager;
     
@@ -19,13 +17,11 @@ public class WeatherHandller : MonoBehaviour
     {
         Manager = GameObject.Find("GameManager");
         Debug.Log("DictionaryStart");
-        Activate();
     }
 
     public void Activate(){
         isActive = true;
-        StartCoroutine(scr());
-        searchWord.text = "";        
+        searchWord.text = "Search Word";
     }
 
     void FixedUpdate()
@@ -58,30 +54,64 @@ public class WeatherHandller : MonoBehaviour
             {
 
                 isActive = false;
-                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             
             }
             else if (action == "NEXT")
             {
-                
+
+                StartCoroutine(Call(searchWord.text));
+                searchWord.text = "";                
 
             }
             else if (action == "PREVIOUS")
             {
             
             }
+            else if (action == "SPECIAL1")
+            {
+
+                StartCoroutine(scr());
+            
+            }
+            else if (action == "SPECIAL2")
+            {
+
+            
+            }
         }
     }
 
 
-   IEnumerator scr(){
+   IEnumerator Call(string number){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/weatherReport"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/setAlarm/?time="+number))
         {
             
-            Debug.Log("Requested Weather api for " );
+            Debug.Log("Requested dictionary api for " );
+    
+            searchWord.text = "Calling ...";
+            
+			yield return webRequest.SendWebRequest();
+         
+            if (webRequest.isNetworkError || webRequest.isHttpError)
+            {
+                Debug.Log( ": Error: " + webRequest.error);
+                meaning.text = webRequest.error;
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+
+	}
+
+
+   IEnumerator scr(){
+		
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR/"))
+        {
+            
+            Debug.Log("Requested dictionary api for " );
     
             searchWord.text = "Loading ...";
             
@@ -99,13 +129,10 @@ public class WeatherHandller : MonoBehaviour
 				Debug.Log(res);
 				Debug.Log(res[0]);
 
-			    word.text = res[4];
-				meaning.text = res[0]+"\n"+res[1];
-				example.text = res[2]+"\n"+res[3];
-			
-		    }
+			    searchWord.text = res[0];
+		    
+            }
         }
 
 	}
-
 }
