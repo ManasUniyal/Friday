@@ -9,19 +9,26 @@ UDP_PORT = 5065
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-#sock.sendto( txt.encode(), (UDP_IP, UDP_PORT))
-
 def job():
-    print("I'm working...")
+    txt = 'Show alarm'
+    sock.sendto(txt.encode(), (UDP_IP, UDP_PORT))
 
 def startSchedule():
 	while 1:
 		schedule.run_pending()
-		time.sleep(1)	
-    
+		time.sleep(1)
+	
 t1 = threading.Thread(target=startSchedule)
-t1.start()
-time1=input("Enter Time:")
-time2 = input('Enter time')
-schedule.every().day.at(time1).do(job)
-schedule.every().day.at(time2).do(job)
+t1.start()    
+
+f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','r')
+alarmTimes = f.read()
+
+alarmTime = str()
+
+for char in alarmTimes:
+	alarmTime += char
+
+str = alarmTime.split('"')
+for i in range(1,len(str),2):
+    schedule.every().day.at(str[i]).do(job)
