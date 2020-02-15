@@ -10,13 +10,14 @@ public class MenuHandller : MonoBehaviour
     private string action;
     private GameObject Manager;
     public TextMeshProUGUI []txts;
-    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Gallery" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "E" , "F" , "G" , "H" }, { "I" , "J", "K" , "L" } };
     private int activePage;
     private int numberOfPages = 3;
 
     //  Options
     public GameObject Dictionary;
     public GameObject News;
+    public GameObject Youtube;
 
     void Start()
     {
@@ -83,7 +84,18 @@ public class MenuHandller : MonoBehaviour
             }
             else if (action == "4")
             {
-            
+                if(activePage == 0){
+
+                    isActive = false;
+                    Youtube.SetActive(true);
+                    Youtube.GetComponent<YoutubeHandller>().Activate();
+                    gameObject.SetActive(false);        
+                
+                }else if(activePage == 1){
+
+                }else if(activePage == 2){
+
+                }
             }
             else if (action == "HOME")
             {
