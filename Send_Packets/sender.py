@@ -21,7 +21,7 @@ def startSchedule():
 t1 = threading.Thread(target=startSchedule)
 t1.start()    
 
-f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','r')
+f = open('/home/manas/Desktop/Friday/Send_Packets/packetLogs/setAlarm.txt','r')
 alarmTimes = f.read()
 
 alarmTime = str()

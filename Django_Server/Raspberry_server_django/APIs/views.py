@@ -33,7 +33,8 @@ def wordMeaning(request):
 		response_meaning = requests.request("GET", url_meaning, headers=headers_words)
 		json_data_meaning = json.loads(response_meaning.text)
 		word = json_data_meaning['word']
-		if (len(json_data_meaning['results'][0]['definition'])) :
+		definition = ""
+		if (len(json_data_meaning['results'][0]['definition'])>0) :
 			definition = json_data_meaning['results'][0]['definition']
 		url_example = "https://wordsapiv1.p.rapidapi.com/words/" + wordToSearch + "/examples"
 		response_example = requests.request("GET", url_example, headers=headers_words)
@@ -115,49 +116,49 @@ def weatherReport(request):
 		return render(request, 'base.html', {'concatenated_string': resultString})
 
 def OCR(request):
+	if request.method == 'GET':
+		def detect_document(path):
+			global resultString
+			"""Detects document features in an image."""
+			from google.cloud import vision
+			import io
+			client = vision.ImageAnnotatorClient()
+			with io.open(path, 'rb') as image_file:
+				content = image_file.read()
+			image = vision.types.Image(content=content)
+			response = client.document_text_detection(image=image)
+			for page in response.full_text_annotation.pages:
+				for block in page.blocks:
+					print('\nBlock confidence: {}\n'.format(block.confidence))
+					
+					for paragraph in block.paragraphs:
+						print('Paragraph confidence: {}'.format(
+							paragraph.confidence))
+						for word in paragraph.words:
+							word_text = ''.join([
+								symbol.text for symbol in word.symbols
+							])
+							resultString += word_text+"#"
+							print(word_text)
+							print('Word text: {} (confidence: {})'.format(
+								word_text, word.confidence))
+			if response.error.message:
+				raise Exception(
+					'{}\nFor more info on error messages, check: '
+					'https://cloud.google.com/apis/design/errors'.format(
+						response.error.message))
 
-	def detect_document(path):
-		global resultString
-		"""Detects document features in an image."""
-		from google.cloud import vision
-		import io
-		client = vision.ImageAnnotatorClient()
-		with io.open(path, 'rb') as image_file:
-			content = image_file.read()
-		image = vision.types.Image(content=content)
-		response = client.document_text_detection(image=image)
-		for page in response.full_text_annotation.pages:
-			for block in page.blocks:
-				print('\nBlock confidence: {}\n'.format(block.confidence))
-				
-				for paragraph in block.paragraphs:
-					print('Paragraph confidence: {}'.format(
-						paragraph.confidence))
-					for word in paragraph.words:
-						word_text = ''.join([
-							symbol.text for symbol in word.symbols
-						])
-						resultString += word_text+"#"
-						print(word_text)
-						print('Word text: {} (confidence: {})'.format(
-							word_text, word.confidence))
-		if response.error.message:
-			raise Exception(
-				'{}\nFor more info on error messages, check: '
-				'https://cloud.google.com/apis/design/errors'.format(
-					response.error.message))
+			import os
+			os.remove("live.jpeg")
+			print("File Removed!")
 
-		import os
-		os.remove("live.jpeg")
-		print("File Removed!")
+		resultString = str()
+		camera = cv2.VideoCapture(0)
+		return_value, image = camera.read()
+		file = 'live.jpeg'
+		cv2.imwrite(file, image)
+		detect_document("live.jpeg")
 
-	resultString = str()
-	camera = cv2.VideoCapture(0)
-	return_value, image = camera.read()
-	file = 'live.jpeg'
-	cv2.imwrite(file, image)
-	detect_document("live.jpeg")
-
-	return render(request, 'base.html', {'concatenated_string': resultString}) 	
+		return render(request, 'base.html', {'concatenated_string': resultString}) 	
 
 

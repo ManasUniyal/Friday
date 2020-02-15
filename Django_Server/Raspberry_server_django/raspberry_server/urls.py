@@ -20,11 +20,14 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('call/', views.call, name='call'),
     path('listSongs/', views.listSongs, name='listSongs'),
     path('listVideos/', views.listVideos, name='listVideos'),
     path('listImages/', views.listImages, name='listImages'),
     path('setAlarm/', views.setAlarm, name='setAlarm'),
     path('captureImage/', views.captureImage, name='captureImage'),
+    path('findQuestion/', views.findQuestion, name='findQuestion'),
+    path('answerToQuestion/', views.answerToQuestion, name='answerToQuestion'),
+    path('findNumber/', views.findNumber, name='findNumber'),
+    path('callNumber/', views.callNumber, name='callNumber'),
     path('APIs/', include('APIs.urls'), name='APIs'),
 ]
