@@ -1,10 +1,54 @@
 from django.shortcuts import render
-import subprocess
 from pythonScripts import raspberryCameraCapture
+import subprocess
+import os
+import serial
+import time
 
-def call(request):
-	if request.method == 'POST':
-		call_GSM(int(request.POST['phoneNumber']))
+def OCR():
+
+	def detect_document(path):
+		global resultString
+		"""Detects document features in an image."""
+		from google.cloud import vision
+		import io
+		client = vision.ImageAnnotatorClient()
+		with io.open(path, 'rb') as image_file:
+			content = image_file.read()
+		image = vision.types.Image(content=content)
+		response = client.document_text_detection(image=image)
+		for page in response.full_text_annotation.pages:
+			for block in page.blocks:
+				print('\nBlock confidence: {}\n'.format(block.confidence))
+				
+				for paragraph in block.paragraphs:
+					print('Paragraph confidence: {}'.format(
+						paragraph.confidence))
+					for word in paragraph.words:
+						word_text = ''.join([
+							symbol.text for symbol in word.symbols
+						])
+						resultString += word_text+"#"
+						print(word_text)
+						print('Word text: {} (confidence: {})'.format(
+							word_text, word.confidence))
+		if response.error.message:
+			raise Exception(
+				'{}\nFor more info on error messages, check: '
+				'https://cloud.google.com/apis/design/errors'.format(
+					response.error.message))
+
+		import os
+		os.remove("live.jpeg")
+		print("File Removed!")
+
+	resultString = str()
+	camera = cv2.VideoCapture(0)
+	return_value, image = camera.read()
+	file = 'live.jpeg'
+	cv2.imwrite(file, image)
+	detect_document("live.jpeg")
+	return resultString
 
 def listSongs(request):
 	if request.method == 'GET':
@@ -33,11 +77,9 @@ def listImages(request):
 		subprocess.call('/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/shell_scripts/get_images_list.sh')
 		f = open("/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/shell_scripts/images_list.txt","r")
 		image_string = ""
-		count = 0
 		for image in f:
-			count += 1
 			image_string += image.strip() + "#"
-		return render(request, 'base_with_count.html', {'count' : count, 'concatenated_string' : image_string})
+		return render(request, 'base.html', {'concatenated_string' : image_string})
 
 def setAlarm(request):
 	if request.method == 'GET':
@@ -68,12 +110,34 @@ def captureImage(request):
 		raspberryCameraCapture.func()
 		return render(request, 'base.html', {'concatenated_string': 'Image captured successfully'})
 
-def reminder(request):
-	if request.method == 'GET':
-		reminderTime = request.GET['time']
-		notification = request.GET['notification']
+def findQuestion(request):
+	text = OCR()
+	return render(request, 'base.html', {'concatenated_string': text})
 
+def answerToQuestion(request):
+	if request.method == 'GET':
+		question = request.GET['question']
+		os.system('python3 /home/manas/Desktop/Friday/scraping/t1.py question') 
+		time.sleep(3)
+		f = open('/home/manas/Desktop/Friday/scraping/answer.txt','r')
+		solution = f.read()
+		return render(request, 'base.html', {'concatenated_string': solution})
+
+def findNumber(request):
+	if request.method == 'GET':
+		text = OCR()
+		return render(request, 'base.html', {'concatenated_string': text})
+
+def callNumber(request):
+	if request.method == 'GET': 
+		phoneNumber = request.GET['number']
+		call_GSM(phoneNumber)
 
 def call_GSM(phoneNumber):
-	pass		
+
+	ser1=serial.Serial('/dev/ttyACM0',9600)
+	ser1.write('call'.encode())
+	time.sleep(5)
+	ser1.write('ATD9057261430;'.encode())
+		
 
