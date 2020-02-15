@@ -21,9 +21,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('call/', views.call, name='call'),
-    path('list_songs/', views.list_songs, name='list_songs'),
-    path('list_videos/', views.list_videos, name='list_videos'),
-    path('list_images/', views.list_images, name='list_images'),
-    path('set_alarm/', views.setAlarm, name='setAlarm'),
+    path('listSongs/', views.listSongs, name='listSongs'),
+    path('listVideos/', views.listVideos, name='listVideos'),
+    path('listImages/', views.listImages, name='listImages'),
+    path('setAlarm/', views.setAlarm, name='setAlarm'),
+    path('captureImage/', views.captureImage, name='captureImage'),
     path('APIs/', include('APIs.urls'), name='APIs'),
 ]
