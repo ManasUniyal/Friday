@@ -1,20 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
-
-public class PicHandller : MonoBehaviour
+public class MusicHandller : MonoBehaviour
 {
-    
+
     public bool isActive;
     private string action;
     private GameObject Manager;
-    public RawImage YourRawImage;
     public TextMeshProUGUI searchWord;
-    
 
     //  Options
     
@@ -27,7 +23,8 @@ public class PicHandller : MonoBehaviour
 
     public void Activate(){  
         isActive = true;
-        StartCoroutine(DownloadImage("http://10.0.0.6:5004/"+searchWord.text));    
+        Debug.Log(searchWord.text);
+        StartCoroutine(loadMusic("http://10.0.0.6:5003/"+searchWord.text));    
     }
 
     
@@ -84,19 +81,13 @@ public class PicHandller : MonoBehaviour
     }
     
 
-    IEnumerator DownloadImage(string MediaUrl)
-    {   
-        UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
-        yield return request.SendWebRequest();
-        if(request.isNetworkError || request.isHttpError) 
-            Debug.Log(request.error);
-        else{
-            Color currColor = YourRawImage.color;
-            currColor.a = 0.6f;
-            YourRawImage.color = currColor;
-            YourRawImage.texture = ((DownloadHandlerTexture) request.downloadHandler).texture;
-        }
-            
+    IEnumerator loadMusic(string url)
+    {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        WWW music = new WWW(url);
+        yield return music;
+        AudioClip lamusic = music.GetAudioClip(true, true, AudioType.MPEG);
+        audioSource.clip = lamusic;
+        audioSource.Play();
     }
-
 }
