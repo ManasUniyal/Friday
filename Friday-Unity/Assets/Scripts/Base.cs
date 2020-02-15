@@ -13,6 +13,8 @@ public class Base : MonoBehaviour
 
     void Start()
     {
+        // Debug.Log("Hiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        // Debug.Log(System.DateTime.Now.ToString());
         Manager = GameObject.Find("GameManager");
     }
 

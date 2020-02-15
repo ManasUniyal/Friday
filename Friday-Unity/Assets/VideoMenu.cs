@@ -14,11 +14,8 @@ public class VideoMenu : MonoBehaviour
     private string []menuItems = new string[100];
     private int activePage;
     private int numberOfPages = 3;
-
-    //  Options
-    public GameObject Dictionary;
-    public GameObject News;
-    public GameObject Youtube;
+    public TextMeshProUGUI searchWord;
+    public GameObject Video;
 
     void Start()
     {
@@ -32,13 +29,12 @@ public class VideoMenu : MonoBehaviour
         activePage = 0;
         StartCoroutine(Daily());
     }
-
+    
     private void UpdatePage(){
         for(int i=0;i<4;i++){
-            txts[i].text = menuItems[activePage,i];
+            txts[i].text = menuItems[activePage*4+i];
         }
     } 
-
     void FixedUpdate()
     {
         if (isActive)
@@ -51,52 +47,23 @@ public class VideoMenu : MonoBehaviour
             }
             else if (action == "1")
             {
-            
+                searchWord.text = menuItems[activePage*4+0];
+                PlayVideo();
             }
             else if (action == "2")
             {   
-                if(activePage == 0){
-
-                    isActive = false;
-                    Dictionary.SetActive(true);
-                    Dictionary.GetComponent<DictionaryHandller>().Activate();
-                    gameObject.SetActive(false);        
-                
-                }else if(activePage == 1){
-
-                }else if(activePage == 2){
-
-                }
+                searchWord.text = menuItems[activePage*4+1];
+                PlayVideo();
             }
             else if (action == "3")
             {
-                if(activePage == 0){
-
-                    isActive = false;
-                    News.SetActive(true);
-                    News.GetComponent<NewsHandller>().Activate();
-                    gameObject.SetActive(false);        
-                
-                }else if(activePage == 1){
-
-                }else if(activePage == 2){
-
-                }            
+                searchWord.text = menuItems[activePage*4+2];
+                PlayVideo();
             }
             else if (action == "4")
             {
-                if(activePage == 0){
-
-                    isActive = false;
-                    Youtube.SetActive(true);
-                    Youtube.GetComponent<YoutubeHandller>().Activate();
-                    gameObject.SetActive(false);        
-                
-                }else if(activePage == 1){
-
-                }else if(activePage == 2){
-
-                }
+                searchWord.text = menuItems[activePage*4+3];
+                PlayVideo();
             }
             else if (action == "HOME")
             {
@@ -126,12 +93,17 @@ public class VideoMenu : MonoBehaviour
 
             }
             else if (action == "SPECIAL")
-            {
-                //  Play
+            {        
             }
         }
     }
 
+    private void PlayVideo(){
+        isActive = false; 
+        Video.SetActive(true);
+        Video.GetComponent<VideoHandller>().Activate();
+        gameObject.SetActive(false);
+    }
     
     IEnumerator Daily(){
 		
