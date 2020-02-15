@@ -26,5 +26,6 @@ urlpatterns = [
     path('listImages/', views.listImages, name='listImages'),
     path('setAlarm/', views.setAlarm, name='setAlarm'),
     path('captureImage/', views.captureImage, name='captureImage'),
+    path('reminder/', views.reminder, name = 'reminder'),
     path('APIs/', include('APIs.urls'), name='APIs'),
 ]

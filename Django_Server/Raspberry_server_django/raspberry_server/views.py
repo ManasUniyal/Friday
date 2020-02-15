@@ -33,15 +33,17 @@ def listImages(request):
 		subprocess.call('/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/shell_scripts/get_images_list.sh')
 		f = open("/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/shell_scripts/images_list.txt","r")
 		image_string = ""
+		count = 0
 		for image in f:
+			count += 1
 			image_string += image.strip() + "#"
-		return render(request, 'base.html', {'concatenated_string' : image_string})
+		return render(request, 'base_with_count.html', {'count' : count, 'concatenated_string' : image_string})
 
 def setAlarm(request):
 	if request.method == 'GET':
 		
 		setAlarmTime = request.GET['alarmTime']
-		f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','r')
+		f = open('/home/manas/Desktop/Friday/Send_Packets/packetLogs/setAlarm.txt','r')
 		alarmTimes = f.read()
 
 		alarmTime = str()
@@ -57,7 +59,7 @@ def setAlarm(request):
 				alarmTime += char
 
 		if setAlarmTime not in alarmTime:
-			f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','a')
+			f = open('/home/manas/Desktop/Friday/Send_Packets/packetLogs/setAlarm.txt','a')
 			f.write(setAlarmTime)
 		return render(request, 'base.html')
 
@@ -65,6 +67,12 @@ def captureImage(request):
 	if request.method == 'GET':
 		raspberryCameraCapture.func()
 		return render(request, 'base.html', {'concatenated_string': 'Image captured successfully'})
+
+def reminder(request):
+	if request.method == 'GET':
+		reminderTime = request.GET['time']
+		notification = request.GET['notification']
+
 
 def call_GSM(phoneNumber):
 	pass		

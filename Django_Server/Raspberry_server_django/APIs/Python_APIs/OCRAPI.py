@@ -1,6 +1,10 @@
 from PIL import Image
 import cv2
-
+import os
+#os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/APIs/Python_APIs/Friday-d95a615e29fd.json"')
+#import subprocess
+#command = 'export GOOGLE_APPLICATION_CREDENTIALS="/home/manas/Desktop/Friday/Django_Server/Raspberry_server_django/APIs/Python_APIs/Friday-d95a615e29fd.json"'
+#res = subprocess.check_output(['bash','-c', command])
 def detect_document(path):
 	global resultString
 	"""Detects document features in an image."""

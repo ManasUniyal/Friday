@@ -33,7 +33,8 @@ def wordMeaning(request):
 		response_meaning = requests.request("GET", url_meaning, headers=headers_words)
 		json_data_meaning = json.loads(response_meaning.text)
 		word = json_data_meaning['word']
-		if (len(json_data_meaning['results'][0]['definition'])) :
+		definition = ""
+		if (len(json_data_meaning['results'][0]['definition'])>0) :
 			definition = json_data_meaning['results'][0]['definition']
 		url_example = "https://wordsapiv1.p.rapidapi.com/words/" + wordToSearch + "/examples"
 		response_example = requests.request("GET", url_example, headers=headers_words)
