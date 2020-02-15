@@ -80,13 +80,15 @@ public class DictionaryHandller : MonoBehaviour
     }
 
 
-   IEnumerator scr(string searchWord){
+   IEnumerator scr(string searchedhWord){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/wordMeaning/?word="+searchWord))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/wordMeaning/?word="+searchedhWord))
         {
             
-            Debug.Log("Requested dictionary api for " + searchWord);
-
+            Debug.Log("Requested dictionary api for " + searchedhWord);
+    
+            searchWord.text = "Loading ...";
+            
 			yield return webRequest.SendWebRequest();
          
             if (webRequest.isNetworkError || webRequest.isHttpError)

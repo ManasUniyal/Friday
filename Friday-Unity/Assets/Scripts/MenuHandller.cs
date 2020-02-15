@@ -16,6 +16,7 @@ public class MenuHandller : MonoBehaviour
 
     //  Options
     public GameObject Dictionary;
+    public GameObject News;
 
     void Start()
     {
@@ -67,7 +68,18 @@ public class MenuHandller : MonoBehaviour
             }
             else if (action == "3")
             {
-            
+                if(activePage == 0){
+
+                    isActive = false;
+                    News.SetActive(true);
+                    News.GetComponent<NewsHandller>().Activate();
+                    gameObject.SetActive(false);        
+                
+                }else if(activePage == 1){
+
+                }else if(activePage == 2){
+
+                }            
             }
             else if (action == "4")
             {
