@@ -111,6 +111,7 @@ public class NewsHandller : MonoBehaviour
 		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/news/"))
         {
             
+            searchWord.text = "Loading ...";
             Debug.Log("Requested dictionary api for " + searchWord);
 
 			yield return webRequest.SendWebRequest();
