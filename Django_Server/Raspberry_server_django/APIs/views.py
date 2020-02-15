@@ -26,11 +26,14 @@ def wordMeaning(request):
 		response_meaning = requests.request("GET", url_meaning, headers=headers)
 		json_data_meaning = json.loads(response_meaning.text)
 		word = json_data_meaning['word']
-		definition = json_data_meaning['results'][0]['definition']
+		if (len(json_data_meaning['results'][0]['definition']))
+			definition = json_data_meaning['results'][0]['definition']
 		url_example = "https://wordsapiv1.p.rapidapi.com/words/" + wordToSearch + "/examples"
 		response_example = requests.request("GET", url_example, headers=headers)
 		json_data_example = json.loads(response_example.text)
-		example = json_data_example['examples'][0]
+		example = ""
+		if len(json_data_example['examples']) > 0:
+			example = json_data_example['examples'][0]
 		text = word+'#'+definition+'#'+example
 		return render(request, 'base.html', {'concatenated_string' : text}) 
 
