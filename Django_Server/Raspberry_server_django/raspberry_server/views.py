@@ -10,18 +10,22 @@ def list_songs(request):
 		subprocess.call('/home/manas/Desktop/raspberry_server_django/shell_scripts/get_songs_list.sh')
 		f = open("/home/manas/Desktop/raspberry_server_django/shell_scripts/songs_list.txt","r")
 		song_string = ""
+		count = 0
 		for song in f:
 			song_string += song.strip() + "#"
-		return render(request, 'base.html', {'concatenated_string' : song_string})
+			count += 1
+		return render(request, 'base.html', {'count': count, 'concatenated_string' : song_string})
 
 def list_videos(request):
 	if request.method == 'GET':
 		subprocess.call('/home/manas/Desktop/raspberry_server_django/shell_scripts/get_videos_list.sh')
 		f = open("/home/manas/Desktop/raspberry_server_django/shell_scripts/videos_list.txt","r")
 		video_string = ""
+		count = 0
 		for video in f:
 			video_string += video.strip() + "#"
-		return render(request, 'base.html', {'concatenated_string' : video_string})
+			count += 1
+		return render(request, 'base.html', {'count' : count, 'concatenated_string' : video_string})
 
 def list_images(request):
 	if request.method == 'GET':

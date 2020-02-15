@@ -6,5 +6,6 @@ from . import views
 urlpatterns = [
     path('wordMeaning/', views.wordMeaning, name='wordMeaning'),
     path('news/', views.news, name='news'),
+    path('youtube/', views.youtube, name='youtube'),
 ]
 
