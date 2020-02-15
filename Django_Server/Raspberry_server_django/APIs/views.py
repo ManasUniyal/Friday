@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
+from PIL import Image
 import requests
 import json
 import urllib.request
@@ -11,6 +12,7 @@ import os
 import shutil
 import socket
 import sys
+import cv2
 
 # Create your views here.
 
@@ -112,6 +114,55 @@ def weatherReport(request):
 		resultString = str(longitude)+'#'+str(latitude)+'#'+city+'#'+str(temperature)+'#'+weather
 		return render(request, 'base.html', {'concatenated_string': resultString})
 
-	
+def OCR(request):
+
+	def detect_document(path):
+		"""Detects document features in an image."""
+		from google.cloud import vision
+		import io
+		client = vision.ImageAnnotatorClient()
+
+		with io.open(path, 'rb') as image_file:
+			content = image_file.read()
+
+		image = vision.types.Image(content=content)
+
+		response = client.document_text_detection(image=image)
+
+		resultString = str()
+
+		for page in response.full_text_annotation.pages:
+			for block in page.blocks:
+				print('\nBlock confidence: {}\n'.format(block.confidence))
+				
+				for paragraph in block.paragraphs:
+					print('Paragraph confidence: {}'.format(
+						paragraph.confidence))
+
+					for word in paragraph.words:
+						resultString += word+"#"
+						word_text = ''.join([
+							symbol.text for symbol in word.symbols
+						])
+						print('Word text: {} (confidence: {})'.format(
+							word_text, word.confidence))
+
+		if response.error.message:
+			raise Exception(
+				'{}\nFor more info on error messages, check: '
+				'https://cloud.google.com/apis/design/errors'.format(
+					response.error.message))
+
+		import os
+		os.remove("live.jpeg")
+		print("File Removed!")
+
+	camera = cv2.VideoCapture(0)
+	return_value, image = camera.read()
+	file = 'live.jpeg'
+	cv2.imwrite(file, image)
+	detect_document("live.jpeg")
+
+	return render(request, 'base.html', {'concatenated_string': resultString}) 	
 
 

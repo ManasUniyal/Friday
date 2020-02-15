@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "onyx-elevator-268302",
+  "private_key_id": "d95a615e29fd1538d2c561f66ce34d243a566de5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDPWHkCi85KluUb\n8zXk97adgcXAFF1nf3oijHBgF05hNdbosQx6ZnsluSjsCzvu1vYpeVmHDb8fsevt\nDTwyk/tH0xDMQpIEDMpXz/yAOPM58NTzK/mpqzNxOYstuMr/qEjZnqlWsXEhvJJ4\nK0w/v8yK9y7QHoZ6srv5KW75wGPE20ieR5g2iuR85vHi5g+ZFwnqo9xOfY6/2jV8\n60NPCcxP6IoweFhWxTtUL6vNn/cVpk2ChcxWNop/WzO/3vuwcbqxlqP08w059K0z\nLVCELCz+3TAooM+3XAoT7bluwgtx+Wyb7KXWX8bEF5yPBh0FJu3gukGwZqUs0pKc\nFtDbdCCNAgMBAAECggEAAwaX/f/NYH7MIklvPQOOZfGgtdlSDn2SPaM3wY17xpyO\n5H+TLzyaRBsTB+llGbMNfQrMfnbYsd/ze1xAoJHNLQCam/RLnDF57+szflXexIS1\n0Os8/r055tgbdGHamedQfpRR0zY9jGvPuV8pmTvGOkB838Q691V0mjaiVeKlvTOi\nI00Hgwj/j2MMZTUuTCDoFoJuwFchkyEX829fDLDkGIIYQpyS2cWX2I1xdKiGW5yz\nG8dDRQUjGy9J+UvmdiZTRcKfBNL98fFS+4L62Nxmrf2rWjbIN346yrVsrh6wlOrM\nJ8k49Sy7oKn551Cy3XaQhagyslfS2R7Oy5B0reoUgwKBgQDzINq3/MNjXASB43wA\n7j4JT0cxJ8DAvxGDi6n0jg6yYpZWkaIhwfGJ3oBJm+8cwpTAP4GJrSIBqWUWjWze\nLmIzjR7ZkXDEoaXjjGWBlRdRkmhHGrdzToPfh+SEbKOa62rg1aoyx1e3SvnkgNnw\n9uoqlaTVM+8qGU9Qri2QxKS5hwKBgQDaUqacXokw8VqmEfN2Zzu00WkBTMqAmPAL\ns0bedpr09kK4hqgDhm8RF7jjyZ2QYRy0x4dmCmOWlOcZW1pW0xQ3NKxrZoympjOY\n+9NAaIwOdn6MS0jcA08697OM6tMt8CLZjDkvJ2o2PQ7zDwqToJhZEffp3AjI+t+l\nl6+uQxmKSwKBgDVn9iOMRm9A+0x85/RcYQwyefT2QoUUc4ht2Xt66QeOWG/TtcWs\nkJ40XgHNWwz6QSqpyI6xlVLAHxCBKHT1w2SHj0tDg33t9D6zzGhWk7S7cGSOHdYa\nXSVw+GWOZ7HUHLoetTBKUZ5VvebP1w/zbSTFkluy+MpKnP2gBSpTx8tpAoGBAMk9\ncBgox7qWbmEvoMPeKlnkwS6SkwJwdqvCR6vdlb4AlMW0UYBWVWBjBmjpOdSQvz4f\nwT2ci+mMPWzRGPd5P2QXqGqjLziZcGwui64N8DOQo9s7teAfKNQI6LcW6Sup8uWm\nbDt70FpIc9Q1ZCFp4aQQfP1SdcKUBLyFkklFzm/7AoGBAMgY/D3MM0uYySD3UlEQ\n5LZRJtMmbjhYlpxO3My3EsAfeTrRZ8PxO4I0stuyRblPrevLxmx8OM5HwOaXe1FJ\nI4L3dxDnr7pLfaRUk0lGTsU4N/KlKVacqYirF3NGAGcWgRpkx4O31fMWWKdq8Rap\nEbjlZnGQrhbdt4ZzNYTdu8Sn\n-----END PRIVATE KEY-----\n",
+  "client_email": "manas-985@onyx-elevator-268302.iam.gserviceaccount.com",
+  "client_id": "110461545088826973977",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/manas-985%40onyx-elevator-268302.iam.gserviceaccount.com"
+}

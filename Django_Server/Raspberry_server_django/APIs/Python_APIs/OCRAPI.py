@@ -18,7 +18,7 @@ def detect_document(path):
     for page in response.full_text_annotation.pages:
         for block in page.blocks:
             print('\nBlock confidence: {}\n'.format(block.confidence))
-
+	    	
             for paragraph in block.paragraphs:
                 print('Paragraph confidence: {}'.format(
                     paragraph.confidence))
