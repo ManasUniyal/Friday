@@ -389,9 +389,9 @@ class QuotesSpider(scrapy.Spider):
     def writetheanswer(self, works, error="[NO ERROR]"):
         if works:
             #add_answer(stringify(self.answer), 1, self.id)
-            #output = open("answer.txt","w")
-            #print(self.answer['answer'],file = output)
-            self.findanswer(self.answer['answer'])
+            output = open("answer.txt","w")
+            print(self.answer['answer'],file = output)
+            #self.findanswer(self.answer['answer'])
         else:
             self.log_error(f"[WRITE_THE_ANSWER]  {error}")
 
