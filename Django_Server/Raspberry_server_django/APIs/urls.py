@@ -4,6 +4,7 @@ from django.conf.urls import include
 from . import views
 
 urlpatterns = [
-    path('wordMeaning', views.wordMeaning, name='wordMeaning'),
+    path('wordMeaning/', views.wordMeaning, name='wordMeaning'),
+    path('news/', views.news, name='news'),
 ]
 

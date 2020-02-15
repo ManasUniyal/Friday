@@ -32,7 +32,30 @@ def list_images(request):
 			image_string += image.strip() + "#"
 		return render(request, 'base.html', {'concatenated_string' : image_string})
 
+def setAlarm(request):
+	if request.method == 'GET':
+		
+		setAlarmTime = request.GET['alarmTime']
+		f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','r')
+		alarmTimes = f.read()
 
+		alarmTime = str()
+		alarmList = list()
+
+		for char in alarmTimes:
+				
+			if char == '\n':
+				print(alarmTime)
+				alarmList.append(alarmTime)
+				alarmTime = str()
+			else:
+				alarmTime += char
+
+		if setAlarmTime not in alarmTime:
+			f = open('/home/manas/Desktop/Friday/packetLogs/setAlarm.txt','a')
+			f.write(setAlarmTime)
+		return render(request, 'base.html')
+		
 def call_GSM(phoneNumber):
 	pass		
 
