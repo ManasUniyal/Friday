@@ -72,7 +72,7 @@ public class DictionaryHandller : MonoBehaviour
             else if (action == "SPECIAL1")
             {
 
-                StartCoroutine(scr("kill"));
+                StartCoroutine(scr(searchWord.text));
                 searchWord.text = "";
             
             }
