@@ -83,16 +83,16 @@ public class YoutubeHandller : MonoBehaviour
 
    IEnumerator scr(string searchedhWord){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/youtube/?word="+searchedhWord))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/youtube/?word="+searchedhWord))
         {
             
             Debug.Log("Requested dictionary api for " + searchedhWord);
-    
+            webRequest.SendWebRequest();
             searchWord.text = "";
             
             meaning.text = "Your Video has started downloading. You can view it after completion in video player.";
 				
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(1f);
          
         }
 
@@ -100,7 +100,7 @@ public class YoutubeHandller : MonoBehaviour
 
     IEnumerator ocr(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/OCR"))
         {
             
             Debug.Log("Requested dictionary api for " );

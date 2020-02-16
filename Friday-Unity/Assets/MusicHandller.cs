@@ -24,7 +24,7 @@ public class MusicHandller : MonoBehaviour
     public void Activate(){  
         isActive = true;
         Debug.Log(searchWord.text);
-        StartCoroutine(loadMusic("http://10.0.0.6:5003/"+searchWord.text));    
+        StartCoroutine(loadMusic("http://10.0.0.11:5003/"+searchWord.text));    
     }
 
     

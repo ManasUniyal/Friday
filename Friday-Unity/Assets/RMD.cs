@@ -19,11 +19,15 @@ public class RMD : MonoBehaviour
     void FixedUpdate()
     {
             action = Manager.GetComponent<UDPHandller>().action;
-			Manager.GetComponent<UDPHandller>().action = null;
-            if (action[0] == 0)
+			if (action != "" && action != null )
             {
+                if (action[0] == 0)
+                {
+                Manager.GetComponent<UDPHandller>().action = null;
                 string []res = action.Split('#');
 				searchWord.text = res[1];
+                
+                }
             }       
     }
 

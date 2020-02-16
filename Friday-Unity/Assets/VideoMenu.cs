@@ -111,7 +111,7 @@ public class VideoMenu : MonoBehaviour
     
     IEnumerator Daily(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/listVideos"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/listVideos"))
         {
             
             searchWord.text = "Loading ...";

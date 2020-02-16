@@ -54,14 +54,14 @@ public class CallHandller : MonoBehaviour
             {
 
                 isActive = false;
-                searchWord = "";
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             
             }
             else if (action == "NEXT")
             {
-                
+                StartCoroutine(scr()); 
 
             }
             else if (action == "PREVIOUS")
@@ -69,13 +69,6 @@ public class CallHandller : MonoBehaviour
             
             }
             else if (action == "SPECIAL1")
-            {
-
-                StartCoroutine(scr());
-                
-            
-            }
-            else if (action == "SPECIAL2")
             {
 
                 StartCoroutine(Call(searchWord.text));
@@ -88,7 +81,7 @@ public class CallHandller : MonoBehaviour
 
    IEnumerator Call(string number){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/Call/?num="+number))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/callNumber/?number="+number))
         {
             
             Debug.Log("Requested dictionary api for " );
@@ -110,7 +103,7 @@ public class CallHandller : MonoBehaviour
 
    IEnumerator scr(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR/"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/OCR/"))
         {
             
             Debug.Log("Requested dictionary api for " );

@@ -61,9 +61,8 @@ public class AlarmHandller : MonoBehaviour
             else if (action == "NEXT")
             {
 
-                StartCoroutine(Call(searchWord.text));
-                searchWord.text = "";                
-
+                StartCoroutine(scr());
+            
             }
             else if (action == "PREVIOUS")
             {
@@ -72,8 +71,9 @@ public class AlarmHandller : MonoBehaviour
             else if (action == "SPECIAL1")
             {
 
-                StartCoroutine(scr());
-            
+                StartCoroutine(Call(searchWord.text));
+                searchWord.text = "";                
+
             }
             else if (action == "SPECIAL2")
             {
@@ -86,7 +86,7 @@ public class AlarmHandller : MonoBehaviour
 
    IEnumerator Call(string number){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/setAlarm/?time="+number))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/setAlarm/?time="+number))
         {
             
             Debug.Log("Requested dictionary api for " );
@@ -108,7 +108,7 @@ public class AlarmHandller : MonoBehaviour
 
    IEnumerator scr(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR/"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/OCR/"))
         {
             
             Debug.Log("Requested dictionary api for " );

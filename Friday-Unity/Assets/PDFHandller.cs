@@ -5,8 +5,9 @@ using UnityEngine.Networking;
 using UnityEngine.Video;
 using TMPro;
 
-public class PicMenu : MonoBehaviour
+public class PDFHandller : MonoBehaviour
 {
+
     public bool isActive;
     private string action;
     private GameObject Manager;
@@ -110,7 +111,7 @@ public class PicMenu : MonoBehaviour
     
     IEnumerator Daily(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/listImages/"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/listPDF/"))
         {
             
             searchWord.text = "Loading ...";

@@ -78,7 +78,7 @@ public class WeatherHandller : MonoBehaviour
 
    IEnumerator scr(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/weatherReport"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/weatherReport"))
         {
             
             Debug.Log("Requested Weather api for " );

@@ -60,8 +60,8 @@ public class QAHandller : MonoBehaviour
             }
             else if (action == "NEXT")
             {
+                StartCoroutine(scr());
                 
-
             }
             else if (action == "PREVIOUS")
             {
@@ -70,15 +70,15 @@ public class QAHandller : MonoBehaviour
             else if (action == "SPECIAL1")
             {
 
-                StartCoroutine(scr());
-                
+                StartCoroutine(Call(searchWord.text));
+                searchWord.text = "";
+
             
             }
             else if (action == "SPECIAL2")
             {
 
-                StartCoroutine(Call(searchWord.text));
-                searchWord.text = "";
+                
             
             }
         }
@@ -87,7 +87,7 @@ public class QAHandller : MonoBehaviour
 
    IEnumerator Call(string number){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/Call/?question="+number))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/answerToQuestion/?question="+number))
         {
             
             searchWord.text = "Loading ...";
@@ -115,7 +115,7 @@ public class QAHandller : MonoBehaviour
 
    IEnumerator scr(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/APIs/OCR/"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/APIs/OCR/"))
         {
             
             Debug.Log("Requested dictionary api for " );

@@ -12,7 +12,7 @@ public class MenuHandller : MonoBehaviour
     private GameObject Manager;
     public TextMeshProUGUI []txts;
     public TextMeshProUGUI searchWord;
-    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "Weather" }, { "Camera" , "Alarm", "Q/A" , "" } };
+    private string [,]menuItems = { { "Phone Call" , "Dictionary" , "News" , "Youtube" }, { "Videos" , "Gallery" , "Music" , "Weather" }, { "Camera" , "Alarm", "Q/A" , "PDF Viewer" } };
     private int activePage;
     private int numberOfPages = 3;
 
@@ -27,6 +27,7 @@ public class MenuHandller : MonoBehaviour
     public GameObject Alarm;
     public GameObject QA;
     public GameObject Call;
+    public GameObject PDF;
     
 
     void Start()
@@ -148,6 +149,11 @@ public class MenuHandller : MonoBehaviour
 
                 }else if(activePage == 2){
 
+                    isActive = false;
+                    PDF.SetActive(true);
+                    PDF.GetComponent<PDFHandller>().Activate();
+                    gameObject.SetActive(false);   
+
                 }
             }
             else if (action == "HOME")
@@ -186,7 +192,7 @@ public class MenuHandller : MonoBehaviour
 
        IEnumerator cam(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/captureImage/"))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/captureImage/"))
         {
             
             Debug.Log("Requested dictionary api for " );

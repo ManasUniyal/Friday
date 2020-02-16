@@ -73,7 +73,7 @@ public class MusicMenu : MonoBehaviour
             {
 
                 isActive = false;
-                searchWord = "";
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 gameObject.SetActive(false);
             
@@ -112,7 +112,7 @@ public class MusicMenu : MonoBehaviour
     
     IEnumerator Daily(){
 		
-		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.6:7001/"+task))
+		using (UnityWebRequest webRequest = UnityWebRequest.Get("http://10.0.0.11:7001/"+task))
         {
             
             searchWord.text = "Loading ...";

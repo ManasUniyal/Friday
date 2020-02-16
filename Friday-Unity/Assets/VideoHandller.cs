@@ -25,7 +25,7 @@ public class VideoHandller : MonoBehaviour
 
     public void Activate(){  
         isActive = true;
-        videoPlayer.url = "http://10.0.0.6:5002/"+searchWord.text;
+        videoPlayer.url = "http://10.0.0.11:5002/"+searchWord.text;
         videoPlayer.targetCameraAlpha = 0.5F;
         StartCoroutine(scr());
         Debug.Log("Hi");
@@ -67,6 +67,7 @@ public class VideoHandller : MonoBehaviour
             {
 
                 isActive = false;
+                searchWord.text = "";
                 Manager.GetComponent<Base>().isActive = true;
                 videoPlayer.Pause();
                 gameObject.SetActive(false);

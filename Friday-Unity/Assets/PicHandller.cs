@@ -27,7 +27,7 @@ public class PicHandller : MonoBehaviour
 
     public void Activate(){  
         isActive = true;
-        StartCoroutine(DownloadImage("http://10.0.0.6:5004/"+searchWord.text));    
+        StartCoroutine(DownloadImage("http://10.0.0.11:5004/"+searchWord.text));    
     }
 
     
