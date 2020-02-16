@@ -105,7 +105,7 @@ public class PDFHandller : MonoBehaviour
     private void PlayVideo(){
         isActive = false; 
         Video.SetActive(true);
-        // Video.GetComponent<PicHandller>().Activate();
+        Video.GetComponent<PicHandller>().Activate();
         gameObject.SetActive(false);
     }
     
